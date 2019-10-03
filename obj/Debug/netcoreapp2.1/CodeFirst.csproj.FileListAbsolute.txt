@@ -1,0 +1,10 @@
+C:\Users\User\source\repos\CodeFirst\bin\Debug\netcoreapp2.1\CodeFirst.deps.json
+C:\Users\User\source\repos\CodeFirst\bin\Debug\netcoreapp2.1\CodeFirst.runtimeconfig.json
+C:\Users\User\source\repos\CodeFirst\bin\Debug\netcoreapp2.1\CodeFirst.runtimeconfig.dev.json
+C:\Users\User\source\repos\CodeFirst\bin\Debug\netcoreapp2.1\CodeFirst.dll
+C:\Users\User\source\repos\CodeFirst\obj\Debug\netcoreapp2.1\CodeFirst.csprojAssemblyReference.cache
+C:\Users\User\source\repos\CodeFirst\obj\Debug\netcoreapp2.1\CodeFirst.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\CodeFirst\obj\Debug\netcoreapp2.1\CodeFirst.AssemblyInfo.cs
+C:\Users\User\source\repos\CodeFirst\bin\Debug\netcoreapp2.1\CodeFirst.pdb
+C:\Users\User\source\repos\CodeFirst\obj\Debug\netcoreapp2.1\CodeFirst.dll
+C:\Users\User\source\repos\CodeFirst\obj\Debug\netcoreapp2.1\CodeFirst.pdb
