@@ -6,9 +6,9 @@ using System.Text;
 
 namespace BLL
 {
-    public class BLL_Main
+    public class EntitiesOperationsService
     {
-        public BLL_Main(IUnitOfWork unitOfWorkParam)
+        public EntitiesOperationsService(IUnitOfWork unitOfWorkParam)
         {
             UnitOfWork = unitOfWorkParam ?? throw new ArgumentNullException(nameof(unitOfWorkParam));
         }
@@ -17,16 +17,16 @@ namespace BLL
 
         public void AddStudent(StudentDTO studentDTO)
         {
-            UnitOfWork.StudentRepository.Insert(BLL_Builder.CreateStudentData(studentDTO));
+            UnitOfWork.StudentRepository.Insert(MappService.CreateStudentData(studentDTO));
 
         }
         public void AddGroup(GroupDTO groupDTO)
         {
-            UnitOfWork.GroupRepository.Insert(BLL_Builder.CreateGroupData(groupDTO));
+            UnitOfWork.GroupRepository.Insert(MappService.CreateGroupData(groupDTO));
         }
         public void AddDormitory(DormitoryDTO dormitoryDTO)
         {
-            UnitOfWork.DormitoryRepository.Insert(BLL_Builder.CreateDormitoryData(dormitoryDTO));
+            UnitOfWork.DormitoryRepository.Insert(MappService.CreateDormitoryData(dormitoryDTO));
         }        
         public IEnumerable<Student> GetAllStudents()
         {

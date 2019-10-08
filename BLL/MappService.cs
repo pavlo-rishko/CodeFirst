@@ -7,13 +7,13 @@ using System.Linq;
 
 namespace BLL
 {
-    public static class BLL_Builder
+    public static class MappService
     {
         public static IServiceCollection ConfigureBllDependencies(this IServiceCollection serviceCollection,
          Action<DbContextOptionsBuilder> optionsAction)
         {
             serviceCollection.ConfigureDalDependencies(optionsAction);
-            serviceCollection.AddTransient<BLL_Main>();
+            serviceCollection.AddTransient<EntitiesOperationsService>();
             return serviceCollection;
         }
         public static StudentDTO CreateStudentDTO(string firstname, string lastname, string groupName, string dormitoryName)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CodeFirst_UI
 {
-    public static class UI_Constans
+    public static class Constans
     {
         public static string StarterMenu = "Виберіть будь ласка сутність(введіть номер) для проведення операцій:\n" +
             "1. Студенти\n2. Групи\n3. Гуртожитки\n";

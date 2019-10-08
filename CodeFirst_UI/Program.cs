@@ -4,7 +4,7 @@ using BLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using static BLL.BLL_Builder;
+using static BLL.MappService;
 using DAL;
 
 namespace CodeFirst_UI
@@ -20,17 +20,16 @@ namespace CodeFirst_UI
                 .ConfigureBllDependencies(options => options
                 .UseSqlServer(configuration.GetConnectionString("default")));
             using var serviceProvider = serviceCollection.BuildServiceProvider();
-            var BL_Service = serviceProvider.GetService<BLL_Main>();
-            //bl.AddStudent(CreateStudentDTO("Ya", "Ustal", "1", "2"));
-
+            var BL_Service = serviceProvider.GetService<EntitiesOperationsService>();
+           
             int userInput;
         Start:
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(UI_Constans.StarterMenu);
+            Console.WriteLine(Constans.StarterMenu);
             try
             {
                 userInput = Convert.ToInt32(Console.ReadLine());
-                if (userInput > UI_Constans.countStarterOperations)
+                if (userInput > Constans.countStarterOperations)
                 {
                     throw new Exception();
                 }
@@ -47,7 +46,7 @@ namespace CodeFirst_UI
             if(userInput == 1)
             {
                 int inputForStudent;
-                Console.WriteLine(UI_Constans.StudentMenu);
+                Console.WriteLine(Constans.StudentMenu);
                 try
                 {
                     inputForStudent = Convert.ToInt32(Console.ReadLine());
@@ -107,7 +106,7 @@ namespace CodeFirst_UI
                     }
                     catch
                     {
-                        Console.WriteLine(UI_Constans.InvalidValue);
+                        Console.WriteLine(Constans.InvalidValue);
                         goto InvalidFirstname;
                     }
 
@@ -119,7 +118,7 @@ namespace CodeFirst_UI
                     }
                     catch
                     {
-                        Console.WriteLine(UI_Constans.InvalidValue);
+                        Console.WriteLine(Constans.InvalidValue);
                         goto InvalidLastname;
                     }
 
@@ -135,7 +134,7 @@ namespace CodeFirst_UI
                     }
                     catch
                     {
-                        Console.WriteLine(UI_Constans.InvalidValue);
+                        Console.WriteLine(Constans.InvalidValue);
                         goto IvalidGroup;
                     }
 
@@ -151,15 +150,15 @@ namespace CodeFirst_UI
                     }
                     catch
                     {
-                        Console.WriteLine(UI_Constans.InvalidValue);
+                        Console.WriteLine(Constans.InvalidValue);
                         goto InvalidDormitory;
                     }
                     BL_Service.AddStudent(CreateStudentDTO(studFirstname, studLastname, Group, Dormitory));
 
-                    if (!UI_Constans.StarterMenu.Contains("4. Зберегти зміни"))
+                    if (!Constans.StarterMenu.Contains("4. Зберегти зміни"))
                     {
-                        UI_Constans.StarterMenu += "4. Зберегти зміни";
-                        UI_Constans.countStarterOperations++;
+                        Constans.StarterMenu += "4. Зберегти зміни";
+                        Constans.countStarterOperations++;
                     }                    
                     
                     goto Start;
@@ -177,18 +176,18 @@ namespace CodeFirst_UI
             {
                 int inputForGroup;
                 InvalidCommandGroup:
-                Console.WriteLine(UI_Constans.GroupMenu);
+                Console.WriteLine(Constans.GroupMenu);
                 try
                 {
                     inputForGroup = Convert.ToInt32(Console.ReadLine());
-                    if(inputForGroup > UI_Constans.countGroupOperations)
+                    if(inputForGroup > Constans.countGroupOperations)
                     {
                         goto InvalidCommandGroup;
                     }
                 }
                 catch
                 {
-                    Console.WriteLine(UI_Constans.InvalidValue);
+                    Console.WriteLine(Constans.InvalidValue);
                     goto InvalidCommandGroup;
                 }
                 if (inputForGroup == 1)
@@ -207,10 +206,10 @@ namespace CodeFirst_UI
                         goto InvalidValue;
                     }
                     BL_Service.AddGroup(CreateGroupDTO(groupNameInput));
-                    if (!UI_Constans.StarterMenu.Contains("4. Зберегти зміни"))
+                    if (!Constans.StarterMenu.Contains("4. Зберегти зміни"))
                     {
-                        UI_Constans.StarterMenu += "4. Зберегти зміни";
-                        UI_Constans.countStarterOperations++;
+                        Constans.StarterMenu += "4. Зберегти зміни";
+                        Constans.countStarterOperations++;
                     }
                     goto Start;
                 }
@@ -238,11 +237,11 @@ namespace CodeFirst_UI
                 int inputForDormitories;
                 string dormitoryNameInput;
             InvalidValue:
-                Console.WriteLine(UI_Constans.DormitoryMenu);
+                Console.WriteLine(Constans.DormitoryMenu);
                 try
                 {
                     inputForDormitories = Convert.ToInt32(Console.ReadLine());
-                    if(inputForDormitories > UI_Constans.countDormitoriesOperations)
+                    if(inputForDormitories > Constans.countDormitoriesOperations)
                     {
                         goto InvalidValue;
                     }
@@ -264,10 +263,10 @@ namespace CodeFirst_UI
                         goto InvalidValue;
                     }
                     BL_Service.AddDormitory(CreateDormitoryDTO(dormitoryNameInput));
-                    if (!UI_Constans.StarterMenu.Contains("4. Зберегти зміни"))
+                    if (!Constans.StarterMenu.Contains("4. Зберегти зміни"))
                     {
-                        UI_Constans.StarterMenu += "4. Зберегти зміни";
-                        UI_Constans.countStarterOperations++;
+                        Constans.StarterMenu += "4. Зберегти зміни";
+                        Constans.countStarterOperations++;
                     }
                     goto Start;
                 }
@@ -292,21 +291,8 @@ namespace CodeFirst_UI
             else if(userInput == 4)
             {
                 BL_Service.SaveChanges();
+                goto Start;
             }
-
-
-            
-
-            //var b = BL_Service.GetAllGroups();
-            //var bb = BL_Service.GetAllDormitories();
-            //BL_Service.SaveChanges();
-
-            //foreach (Student a in b )
-            //{
-            //    Console.WriteLine($"{a.Firstname} {a.Lastname} {a.Group?.GroupName} {a.Dormitory?.NameDormitory??"No dormitory"}");
-            //}
-                        
-            //Console.WriteLine(UI_Constans.StarterMenu);
         }
     }
 }
