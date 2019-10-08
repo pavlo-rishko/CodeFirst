@@ -9,5 +9,6 @@ namespace DAL
         void Insert(TEntity obj);
         void Update(TEntity obj);
         void DeleteById(object id);
+        int Count();
     }
 }

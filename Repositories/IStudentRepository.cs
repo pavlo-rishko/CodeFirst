@@ -4,6 +4,7 @@ namespace DAL
 {
     public interface IStudentRepository : IRepository<Student>
     {
+        IEnumerable<Student> GetAllStudents();
         IEnumerable<Student> GetAllStudentsWithDormitory();
         IEnumerable<Student> GetAllStudentsWithoutDormitory();
     }

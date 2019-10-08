@@ -12,7 +12,11 @@ namespace DAL
             studentDbEntities = context;
         }
 
-
+        public IEnumerable<Student> GetAllStudents()
+        {
+            IQueryable<Student> students = studentDbEntities.Students.Include(s => s.Dormitory).Include(s => s.Group);
+            return students.AsEnumerable();
+        }
         public IEnumerable<Student> GetAllStudentsWithDormitory()
         {
             IQueryable<Student> students = studentDbEntities.Students.Include(s => s.Dormitory).Include(s => s.Group);

@@ -34,6 +34,10 @@ namespace DAL
             TEntity existing = Entities.Find(id);
             Entities.Remove(existing);
         }
+        public int Count()
+        {
+            return Entities.Count<TEntity>();
+        }
     }
 }
 
