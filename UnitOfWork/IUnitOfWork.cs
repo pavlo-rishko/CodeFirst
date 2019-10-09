@@ -1,6 +1,8 @@
 ﻿using System;
+using DAL.Models;
+using DAL.Repositories;
 
-namespace DAL
+namespace DAL.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {

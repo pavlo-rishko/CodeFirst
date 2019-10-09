@@ -1,17 +1,17 @@
 ﻿using System;
-using BLL.DTO;
 using BLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static BLL.MappService;
 using DAL;
+using DAL.Models;
 
 namespace CodeFirst_UI
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var configuration = new ConfigurationBuilder()
             .AddJsonFile("jsonPath.json")
@@ -20,7 +20,7 @@ namespace CodeFirst_UI
                 .ConfigureBllDependencies(options => options
                 .UseSqlServer(configuration.GetConnectionString("default")));
             using var serviceProvider = serviceCollection.BuildServiceProvider();
-            var BL_Service = serviceProvider.GetService<EntitiesOperationsService>();
+            var blService = serviceProvider.GetService<EntitiesOperationsService>();
            
             int userInput;
         Start:
@@ -29,7 +29,7 @@ namespace CodeFirst_UI
             try
             {
                 userInput = Convert.ToInt32(Console.ReadLine());
-                if (userInput > Constans.countStarterOperations)
+                if (userInput > Constans.CountStarterOperations)
                 {
                     throw new Exception();
                 }
@@ -57,7 +57,7 @@ namespace CodeFirst_UI
                 }
                 if(inputForStudent == 1)
                 {
-                    var allStudents = BL_Service.GetAllStudents();
+                    var allStudents = blService.GetAllStudents();
                     foreach(Student a in allStudents)
                     {
                         Console.WriteLine($"{a.Firstname} {a.Lastname} {a.Group.GroupName} {a.Dormitory?.NameDormitory ?? "No dormitory"}");
@@ -68,7 +68,7 @@ namespace CodeFirst_UI
 
                 else if(inputForStudent == 2)
                 {
-                    var allStudents = BL_Service.GetAllStudentsWithoutDormitory();
+                    var allStudents = blService.GetAllStudentsWithoutDormitory();
                     foreach(Student a in allStudents)
                     {
                         Console.WriteLine($"{a.Firstname} {a.Lastname} {a.Group.GroupName} {a.Dormitory?.NameDormitory ?? "No dormitory"}");
@@ -79,7 +79,7 @@ namespace CodeFirst_UI
 
                 else if (inputForStudent == 3)
                 {
-                    var allStudents = BL_Service.GetAllStudentsWithDormitory();
+                    var allStudents = blService.GetAllStudentsWithDormitory();
                     foreach(Student a in allStudents)
                     {
                         Console.WriteLine($"{a.Firstname} {a.Lastname} {a.Group.GroupName} {a.Dormitory?.NameDormitory ?? "No dormitory"}");
@@ -90,13 +90,13 @@ namespace CodeFirst_UI
 
                 else if (inputForStudent == 4)
                 {
-                    int maxGroupID = BL_Service.CountNumberGroups();
-                    int maxDormitoryID = BL_Service.CountNumberDormitories();
+                    int maxGroupId = blService.CountNumberGroups();
+                    int maxDormitoryId = blService.CountNumberDormitories();
                     
                     string studFirstname;
                     string studLastname;
-                    string Group;
-                    string Dormitory;
+                    string @group;
+                    string dormitory;
 
                     InvalidFirstname: 
                     Console.WriteLine("Будь ласка введіть дані студента:\nІм'я: ");
@@ -125,9 +125,9 @@ namespace CodeFirst_UI
                     IvalidGroup:
                     try
                     {
-                        Console.WriteLine($"Id групи(максимальне ID = {maxGroupID}): ");
-                        Group = Console.ReadLine();
-                        if(Convert.ToInt32(Group) > maxGroupID)
+                        Console.WriteLine($"Id групи(максимальне ID = {maxGroupId}): ");
+                        @group = Console.ReadLine();
+                        if(Convert.ToInt32(@group) > maxGroupId)
                         {
                             throw new Exception();
                         }
@@ -141,9 +141,9 @@ namespace CodeFirst_UI
                     InvalidDormitory:
                     try
                     {
-                        Console.WriteLine($"Id гуртожитку(максимальне ID = {maxDormitoryID}): ");                        
-                        Dormitory = Console.ReadLine();
-                        if (Convert.ToInt32(Dormitory) > maxDormitoryID)
+                        Console.WriteLine($"Id гуртожитку(максимальне ID = {maxDormitoryId}): ");                        
+                        dormitory = Console.ReadLine();
+                        if (Convert.ToInt32(dormitory) > maxDormitoryId)
                         {
                             throw new Exception();
                         }
@@ -153,12 +153,12 @@ namespace CodeFirst_UI
                         Console.WriteLine(Constans.InvalidValue);
                         goto InvalidDormitory;
                     }
-                    BL_Service.AddStudent(CreateStudentDTO(studFirstname, studLastname, Group, Dormitory));
+                    blService.AddStudent(CreateStudentDto(studFirstname, studLastname, @group, dormitory));
 
                     if (!Constans.StarterMenu.Contains("4. Зберегти зміни"))
                     {
                         Constans.StarterMenu += "4. Зберегти зміни";
-                        Constans.countStarterOperations++;
+                        Constans.CountStarterOperations++;
                     }                    
                     
                     goto Start;
@@ -180,7 +180,7 @@ namespace CodeFirst_UI
                 try
                 {
                     inputForGroup = Convert.ToInt32(Console.ReadLine());
-                    if(inputForGroup > Constans.countGroupOperations)
+                    if(inputForGroup > Constans.CountGroupOperations)
                     {
                         goto InvalidCommandGroup;
                     }
@@ -205,17 +205,17 @@ namespace CodeFirst_UI
                         Console.WriteLine("Не вірне введення");
                         goto InvalidValue;
                     }
-                    BL_Service.AddGroup(CreateGroupDTO(groupNameInput));
+                    blService.AddGroup(CreateGroupDto(groupNameInput));
                     if (!Constans.StarterMenu.Contains("4. Зберегти зміни"))
                     {
                         Constans.StarterMenu += "4. Зберегти зміни";
-                        Constans.countStarterOperations++;
+                        Constans.CountStarterOperations++;
                     }
                     goto Start;
                 }
                 else if (inputForGroup == 2)
                 {
-                    var groups = BL_Service.GetAllGroups();
+                    var groups = blService.GetAllGroups();
                     foreach(Group a in groups)
                     {
                         Console.WriteLine($"{a.Id}. {a.GroupName}");
@@ -241,7 +241,7 @@ namespace CodeFirst_UI
                 try
                 {
                     inputForDormitories = Convert.ToInt32(Console.ReadLine());
-                    if(inputForDormitories > Constans.countDormitoriesOperations)
+                    if(inputForDormitories > Constans.CountDormitoriesOperations)
                     {
                         goto InvalidValue;
                     }
@@ -262,17 +262,17 @@ namespace CodeFirst_UI
                         Console.WriteLine("Не вірне введення");
                         goto InvalidValue;
                     }
-                    BL_Service.AddDormitory(CreateDormitoryDTO(dormitoryNameInput));
+                    blService.AddDormitory(CreateDormitoryDto(dormitoryNameInput));
                     if (!Constans.StarterMenu.Contains("4. Зберегти зміни"))
                     {
                         Constans.StarterMenu += "4. Зберегти зміни";
-                        Constans.countStarterOperations++;
+                        Constans.CountStarterOperations++;
                     }
                     goto Start;
                 }
                 else if (inputForDormitories == 2)
                 {
-                    var dormitories = BL_Service.GetAllDormitories();
+                    var dormitories = blService.GetAllDormitories();
                     foreach(Dormitory a in dormitories)
                     {
                         Console.WriteLine($"{a.Id} {a.NameDormitory}");
@@ -290,7 +290,7 @@ namespace CodeFirst_UI
             }
             else if(userInput == 4)
             {
-                BL_Service.SaveChanges();
+                blService.SaveChanges();
                 goto Start;
             }
         }

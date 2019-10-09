@@ -3,7 +3,7 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
+using DAL.Models;
 
 namespace BLL
 {
@@ -16,9 +16,9 @@ namespace BLL
             serviceCollection.AddTransient<EntitiesOperationsService>();
             return serviceCollection;
         }
-        public static StudentDTO CreateStudentDTO(string firstname, string lastname, string groupName, string dormitoryName)
+        public static StudentDto CreateStudentDto(string firstname, string lastname, string groupName, string dormitoryName)
         {
-            StudentDTO data = new StudentDTO
+            StudentDto data = new StudentDto
             {
 
                 Firstname = firstname,
@@ -29,9 +29,9 @@ namespace BLL
             };
             return data;
         }
-        public static GroupDTO CreateGroupDTO(string groupName, int id = default)
+        public static GroupDto CreateGroupDto(string groupName, int id = default)
         {
-            GroupDTO data = new GroupDTO
+            GroupDto data = new GroupDto
             {
                 Id = id,
                 GroupName = groupName
@@ -39,9 +39,9 @@ namespace BLL
             return data;
         }
 
-        public static DormitoryDTO CreateDormitoryDTO( string dormitoryName, int id = default)
+        public static DormitoryDto CreateDormitoryDto( string dormitoryName, int id = default)
         {
-            DormitoryDTO data = new DormitoryDTO
+            DormitoryDto data = new DormitoryDto
             {
                 Id = id,
                 NameDormitory = dormitoryName
@@ -49,7 +49,7 @@ namespace BLL
             return data;
         }
 
-        public static Student CreateStudentData(StudentDTO student)
+        public static Student CreateStudentData(StudentDto student)
         {
             Student data = new Student
             {
@@ -62,7 +62,7 @@ namespace BLL
             };
             return data;
         }
-        public static Dormitory CreateDormitoryData(DormitoryDTO dormitory)
+        public static Dormitory CreateDormitoryData(DormitoryDto dormitory)
         {
             Dormitory data = new Dormitory
             {
@@ -71,11 +71,11 @@ namespace BLL
             return data;
         }
 
-        public static Group  CreateGroupData(GroupDTO groupDTO)
+        public static Group  CreateGroupData(GroupDto groupDto)
         {
             Group data = new Group
             {
-                GroupName = groupDTO.GroupName
+                GroupName = groupDto.GroupName
             };
             return data;
         }

@@ -1,8 +1,8 @@
 ﻿using BLL.DTO;
-using DAL;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using DAL.Models;
+using DAL.UnitOfWork;
 
 namespace BLL
 {
@@ -15,18 +15,18 @@ namespace BLL
         private IUnitOfWork UnitOfWork { get; }
 
 
-        public void AddStudent(StudentDTO studentDTO)
+        public void AddStudent(StudentDto studentDto)
         {
-            UnitOfWork.StudentRepository.Insert(MappService.CreateStudentData(studentDTO));
+            UnitOfWork.StudentRepository.Insert(MappService.CreateStudentData(studentDto));
 
         }
-        public void AddGroup(GroupDTO groupDTO)
+        public void AddGroup(GroupDto groupDto)
         {
-            UnitOfWork.GroupRepository.Insert(MappService.CreateGroupData(groupDTO));
+            UnitOfWork.GroupRepository.Insert(MappService.CreateGroupData(groupDto));
         }
-        public void AddDormitory(DormitoryDTO dormitoryDTO)
+        public void AddDormitory(DormitoryDto dormitoryDto)
         {
-            UnitOfWork.DormitoryRepository.Insert(MappService.CreateDormitoryData(dormitoryDTO));
+            UnitOfWork.DormitoryRepository.Insert(MappService.CreateDormitoryData(dormitoryDto));
         }        
         public IEnumerable<Student> GetAllStudents()
         {

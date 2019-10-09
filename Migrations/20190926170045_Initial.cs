@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DAL
+namespace DAL.Migrations
 {
     public partial class Initial : Migration
     {

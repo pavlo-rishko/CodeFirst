@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace CodeFirst_UI
 {
     public static class Constans
@@ -27,8 +24,8 @@ namespace CodeFirst_UI
             "0. Повернутись до перереднього меню\n";
 
         public const string InvalidValue = "Не правильний формат введення даних, спробуйте знову";
-        public static int countStarterOperations = 3;
-        public const int countGroupOperations = 2;
-        public const int countDormitoriesOperations = 2;
+        public static int CountStarterOperations = 3;
+        public const int CountGroupOperations = 2;
+        public const int CountDormitoriesOperations = 2;
     }
 }

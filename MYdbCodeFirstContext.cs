@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
@@ -13,7 +14,6 @@ namespace DAL
         {
             optionsBuilder.UseSqlServer(@"Server=WIN-BKMNAK88A69\SQLEXPRESS;Database=MYdbCodeFirst;Trusted_Connection=True");
         }
-
         private MYdbCodeFirstContext()
         {
 

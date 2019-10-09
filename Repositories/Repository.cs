@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
-namespace DAL
+namespace DAL.Repositories
 {
     class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        public Repository(DbContext _context)
+        public Repository(DbContext context)
         {            
-            Entities = _context.Set<TEntity>();
+            Entities = context.Set<TEntity>();
         }
 
         private DbSet<TEntity> Entities { get; }
