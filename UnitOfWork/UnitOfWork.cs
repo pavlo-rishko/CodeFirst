@@ -56,7 +56,7 @@ namespace DAL.UnitOfWork
         }
         public void SaveChanges()
         {
-            Context.SaveChanges();
+            Context?.SaveChanges();
         }
 
 

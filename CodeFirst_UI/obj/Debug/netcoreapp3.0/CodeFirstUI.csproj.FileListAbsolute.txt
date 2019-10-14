@@ -49,3 +49,4 @@ C:\Users\User\source\repos\CodeFirst\CodeFirst_UI\obj\Debug\netcoreapp3.0\CodeFi
 C:\Users\User\source\repos\CodeFirst\CodeFirst_UI\obj\Debug\netcoreapp3.0\CodeFirstUI.dll
 C:\Users\User\source\repos\CodeFirst\CodeFirst_UI\obj\Debug\netcoreapp3.0\CodeFirstUI.pdb
 C:\Users\User\source\repos\CodeFirst\CodeFirst_UI\bin\Debug\netcoreapp3.0\jsonPath.json
+C:\Users\User\source\repos\CodeFirst\CodeFirst_UI\bin\Debug\netcoreapp3.0\AutoMapper.dll

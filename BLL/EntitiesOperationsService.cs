@@ -62,7 +62,7 @@ namespace BLL
 
         public void SaveChanges()
         {
-            UnitOfWork.SaveChanges();
+            UnitOfWork?.SaveChanges();
         }
     }
 }

@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static BLL.MappService;
-using DAL;
 using DAL.Models;
 
 namespace CodeFirst_UI
@@ -95,8 +94,8 @@ namespace CodeFirst_UI
                     
                     string studFirstname;
                     string studLastname;
-                    string @group;
-                    string dormitory;
+                    int @group;
+                    int? dormitory;
 
                     InvalidFirstname: 
                     Console.WriteLine("Будь ласка введіть дані студента:\nІм'я: ");
@@ -126,7 +125,7 @@ namespace CodeFirst_UI
                     try
                     {
                         Console.WriteLine($"Id групи(максимальне ID = {maxGroupId}): ");
-                        @group = Console.ReadLine();
+                        @group = Convert.ToInt32(Console.ReadLine());
                         if(Convert.ToInt32(@group) > maxGroupId)
                         {
                             throw new Exception();
@@ -141,12 +140,21 @@ namespace CodeFirst_UI
                     InvalidDormitory:
                     try
                     {
-                        Console.WriteLine($"Id гуртожитку(максимальне ID = {maxDormitoryId}): ");                        
-                        dormitory = Console.ReadLine();
-                        if (Convert.ToInt32(dormitory) > maxDormitoryId)
+                        Console.WriteLine($"Id гуртожитку(максимальне ID = {maxDormitoryId}, або \"null\"): ");
+                        string dormitoryInput = Console.ReadLine();
+                        if (dormitoryInput == "null")
                         {
-                            throw new Exception();
+                            dormitory = 1;
                         }
+                        else
+                        {
+                            dormitory = Convert.ToInt32(dormitoryInput);
+                                if (dormitory > maxDormitoryId) 
+                                {
+                                    throw new Exception();
+                                }
+                        }
+  
                     }
                     catch
                     {

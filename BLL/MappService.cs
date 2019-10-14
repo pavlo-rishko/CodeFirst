@@ -16,7 +16,7 @@ namespace BLL
             serviceCollection.AddTransient<EntitiesOperationsService>();
             return serviceCollection;
         }
-        public static StudentDto CreateStudentDto(string firstname, string lastname, string groupName, string dormitoryName)
+        public static StudentDto CreateStudentDto(string firstname, string lastname, int groupName, int? dormitoryName)
         {
             StudentDto data = new StudentDto
             {
