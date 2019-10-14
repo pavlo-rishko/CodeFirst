@@ -144,7 +144,7 @@ namespace CodeFirst_UI
                         string dormitoryInput = Console.ReadLine();
                         if (dormitoryInput == "null")
                         {
-                            dormitory = 1;
+                            dormitory = 1                               ;
                         }
                         else
                         {

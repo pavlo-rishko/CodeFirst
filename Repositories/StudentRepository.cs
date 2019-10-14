@@ -22,7 +22,7 @@ namespace DAL.Repositories
         {
             IQueryable<Student> students = _studentDbEntities.Students.Include(s => s.Dormitory).Include(s => s.Group);
 
-            students = students.Where(s => s.DormitoryId.HasValue);
+            students = students.Where(s => s.DormitoryId.HasValue && s.DormitoryId != 1);
             return students.AsEnumerable();
         }
 
@@ -30,7 +30,7 @@ namespace DAL.Repositories
         {
             IQueryable<Student> students = _studentDbEntities.Students.Include(s => s.Group);
 
-            students = students.Where(s => s.DormitoryId == null);
+            students = students.Where(s => s.DormitoryId == null || s.DormitoryId == 1);
             return students.AsEnumerable();
         }
     }
